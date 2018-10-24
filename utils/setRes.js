@@ -5,4 +5,5 @@ module.exports = (res, code, data, message) => {
     message: message || 'success'
   }
   res.send(response)
+  res.end()
 }
