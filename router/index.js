@@ -15,12 +15,7 @@ const report = require('../controllers/report')
 const Router = app => {
   app.get('/login', user.login)
   app.post('/signOut', user.signOut)
-
-  // app.all('*', (req, res, next) => {
-  //   console.log(req.headers.cookie)
-  //   console.log(req.session)
-  //   next()
-  // })
+  app.all('*', user.auth)
 
 
   app.get('/swangrey/report/amount', report.pv)
@@ -31,7 +26,6 @@ const Router = app => {
 
   app.get('*', common.getMethods)
   app.post('*', common.postMethods)
-
 
 }
 

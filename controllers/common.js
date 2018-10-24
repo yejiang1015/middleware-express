@@ -10,17 +10,26 @@
 const setRes = require('../utils/setRes')
 const axios = require('../axios')
 
-const common = {
-  getMethods(req, res, next) {
+class Common {
+  static getMethods(req, res, next) {
     const url = req._parsedUrl.pathname
-    const { query, method } = req
+    const { query } = req
     axios.get(url, { params: query }).then(response => {
       setRes(res, response.data.errno, response.data.data, response.data.errmsg)
+    }).catch(error => {
+      setRes(res, 500, null, error.message);
     })
-  },
-  postMethods(req, res, next) {
-    setRes(res, 200, { name: 'post' })
+  }
+  
+  static postMethods(req, res, next) {
+    const url = req._parsedUrl.pathname
+    const { body } = req
+    axios.get(url, body).then(response => {
+      setRes(res, response.data.errno, response.data.data, response.data.errmsg)
+    }).catch(error => {
+      setRes(res, 500, null, error.message);
+    })
   }
 }
 
-module.exports = common
+module.exports = Common
