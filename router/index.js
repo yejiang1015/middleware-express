@@ -13,10 +13,10 @@ const common = require('../controllers/common')
 const report = require('../controllers/report')
 
 const Router = app => {
+  
   app.get('/login', user.login)
   app.post('/signOut', user.signOut)
   app.all('*', user.auth)
-
 
   app.get('/swangrey/report/amount', report.pv)
   app.get('/swangrey/report/mtj', report.mtj)
